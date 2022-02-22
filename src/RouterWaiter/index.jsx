@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /*
  * @Description: 主组件
  * @Author: Neo
@@ -8,7 +9,6 @@
 import React from 'react'
 import { BrowserRouter, HashRouter } from 'react-router-dom'
 import Wrap from './wrap.jsx'
-import PropTypes from 'prop-types'
 import Fn from './fn.js'
 
 function RouterWaiter ({
@@ -33,16 +33,6 @@ function RouterWaiter ({
       <Wrap reactRoutes={reactRoutes} />
     </Router>
   )
-}
-
-const { string, func, bool, element, array } = PropTypes
-
-RouterWaiter.propTypes = {
-  routes: array,
-  onRouteBefore: func,
-  basename: string,
-  isHash: bool,
-  loading: element,
 }
 
 export default RouterWaiter

@@ -17,11 +17,11 @@ export default class Fn {
   }
 
   /**
- * @description: 路由配置列表数据转换
- * @param {string} redirect 要重定向的路由路径
- * @param {function} component 函数形式import懒加载组件
- * @param {object} meta 自定义字段
- */
+   * @description: 路由配置列表数据转换
+   * @param {string} redirect 要重定向的路由路径
+   * @param {function} component 函数形式import懒加载组件
+   * @param {object} meta 自定义字段
+   */
   transformRoutes (routeList = this.routes) {
     const list = []
     routeList.forEach(route => {
@@ -47,8 +47,8 @@ export default class Fn {
   }
 
   /**
- * @description: 路由懒加载
- */
+   * @description: 路由懒加载
+   */
   lazyLoad (importFn, meta) {
     meta = meta || {}
     const Element = React.lazy(importFn)
