@@ -5,6 +5,7 @@
  * @LastEditTime: 2022-02-18
  * @LastEditors: Neo
  */
+import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 let temp = null

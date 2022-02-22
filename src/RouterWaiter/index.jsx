@@ -5,8 +5,9 @@
  * @LastEditTime: 2022-02-22
  * @LastEditors: Neo
  */
+import React from 'react'
 import { BrowserRouter, HashRouter } from 'react-router-dom'
-import Wrap from './wrap'
+import Wrap from './wrap.jsx'
 import PropTypes from 'prop-types'
 import Fn from './fn.js'
 

@@ -7,7 +7,7 @@
  */
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import Guard from './guard'
+import Guard from './guard.jsx'
 
 export default class Fn {
   constructor (option) {
