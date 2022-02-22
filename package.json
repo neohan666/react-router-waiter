@@ -1,0 +1,38 @@
+{
+  "name": "react-router-waiter",
+  "version": "0.0.1",
+  "description": "react-router v6 路由统一管理及路由拦截方案",
+  "author": "neohan",
+  "main": "src/index",
+  "scripts": {
+  },
+  "keywords": [
+    "react",
+    "react-router",
+    "guard"
+  ],
+  "license": "MIT",
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/neohan666/react-router-waiter.git"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-webpack-plugin": "^3.1.1"
+  }
+}
