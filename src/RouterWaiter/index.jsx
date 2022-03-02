@@ -1,41 +1,27 @@
-/* eslint-disable react/prop-types */
 /*
  * @Description: 主组件
  * @Author: Neo
  * @Date: 2022-02-22
- * @LastEditTime: 2022-02-22
+ * @LastEditTime: 2022-03-02
  * @LastEditors: Neo
  */
-import React from 'react'
-import { BrowserRouter, HashRouter } from 'react-router-dom'
-import Wrap from './wrap.jsx'
+import { useRoutes } from 'react-router-dom'
 import Fn from './fn.js'
 
 function RouterWaiter ({
   routes,
   onRouteBefore,
-  basename,
-  isHash,
   loading,
 }) {
-  basename = basename || process.env.PUBLIC_URL || ''
-  if (basename === '.') {
-    basename = undefined
-  }
-  const Router = isHash ? HashRouter : BrowserRouter
-
   const fn = new Fn({
     routes,
     onRouteBefore,
     loading,
   })
   const reactRoutes = fn.transformRoutes()
+  const elements = useRoutes(reactRoutes)
 
-  return (
-    <Router basename={basename}>
-      <Wrap reactRoutes={reactRoutes} />
-    </Router>
-  )
+  return elements
 }
 
 export default RouterWaiter

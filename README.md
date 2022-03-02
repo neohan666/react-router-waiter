@@ -5,22 +5,25 @@ react-router v6 路由统一管理及路由拦截方案。
 
 ## 1、安装
 ```js
-npm i react-router-dom react-router-waiter -S
+npm i react-router-waiter -S
 ```
 
 ## 2、使用
 ```js
 // 在项目入口文件index.js或入口组件App.js里引入
+import { HashRouter } from 'react-router-dom' // 引入react-router-dom的官方路由组件
 import RouterWaiter from 'react-router-waiter' // 引入插件
 import routes from './router' // 引入你的路由配置
 import onRouteBefore from './onRouteBefore' // 引入你定义的路由拦截函数
 
 function App () {
   return (
-    <RouterWaiter
-      routes={routes}
-      onRouteBefore={onRouteBefore}
-    />
+    <HashRouter>
+      <RouterWaiter
+        routes={routes}
+        onRouteBefore={onRouteBefore}
+      />
+    </HashRouter>
   )
 }
 
@@ -92,9 +95,7 @@ const onRouteBefore = ({ pathname, meta }) => {
 export default onRouteBefore
 ```
 ## 5、API
-主组件 RouterWaiter 的配置 API：
-+ `router`，数组类型，路由配置数组
-+ `onRouteBefore`，函数类型，路由拦截函数，可选
-+ `basename`，字符串类型，项目部署在服务器子目录时的基础路径，默认取 process.env.PUBLIC_URL
-+ `isHash`，布尔类型，是否使用 HashRouter，默认 false，即默认使用 BrowserRouter
-+ `loading`，组件类型，懒加载路由切换时的 loading 效果组件，默认为一个空div标签
+组件 RouterWaiter 的配置 API：
++ `routes`，数组类型，路由配置数组（必填）
++ `onRouteBefore`，函数类型，路由拦截函数（可选）
++ `loading`，组件类型，懒加载路由切换时的 loading 效果组件，默认为一个空div标签（可选）

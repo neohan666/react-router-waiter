@@ -1,6 +1,6 @@
 {
   "name": "react-router-waiter",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "react-router v6 路由统一管理及路由拦截方案",
   "author": "neohan",
   "main": "dist/index",
