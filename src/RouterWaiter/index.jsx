@@ -19,6 +19,9 @@ function RouterWaiter ({
   loading,
 }) {
   basename = basename || process.env.PUBLIC_URL || ''
+  if (basename === '.') {
+    basename = undefined
+  }
   const Router = isHash ? HashRouter : BrowserRouter
 
   const fn = new Fn({

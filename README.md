@@ -93,7 +93,7 @@ export default onRouteBefore
 ```
 ## 5、API
 主组件 RouterWaiter 的配置 API：
-+ `routers`，数组类型，路由配置数组
++ `router`，数组类型，路由配置数组
 + `onRouteBefore`，函数类型，路由拦截函数，可选
 + `basename`，字符串类型，项目部署在服务器子目录时的基础路径，默认取 process.env.PUBLIC_URL
 + `isHash`，布尔类型，是否使用 HashRouter，默认 false，即默认使用 BrowserRouter
