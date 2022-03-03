@@ -1,10 +1,12 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
 const baseCssUse = [
+  MiniCssExtractPlugin.loader,
   'css-loader',
   'postcss-loader'
 ]
@@ -17,9 +19,9 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, './dist'),
-    libraryTarget: 'umd',
-    library: 'RouterWaiter',
-    umdNamedDefine: true,
+    library: {
+      type: 'commonjs-static',
+    },
   },
   resolve: {
     alias: {
@@ -28,7 +30,10 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new OptimizeCssAssetsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'index.css',
+      ignoreOrder: true
+    }),
   ],
   module: {
     rules: [
@@ -73,8 +78,11 @@ module.exports = {
           }
         }
       }),
+      new CssMinimizerPlugin(),
     ],
   },
-  target: 'node',
-  externals: [nodeExternals()],
+  externalsPresets: { node: true },
+  externals: [nodeExternals({
+    allowlist: [],
+  })],
 }
