@@ -39,7 +39,6 @@
     "browserslist": "^4.14.7",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
-    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.3",
@@ -47,11 +46,8 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-webpack-plugin": "^3.1.1",
-    "file-loader": "^6.2.0",
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
-    "mini-css-extract-plugin": "^1.3.1",
     "postcss-loader": "^4.1.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.3.1",
@@ -60,5 +56,17 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4",
     "webpack-node-externals": "^3.0.0"
+  },
+  "browserslist": {
+    "production": [
+      "> 0.2% in CN",
+      "not dead",
+      "last 2 versions"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ]
   }
 }

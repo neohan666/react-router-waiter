@@ -1,15 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
-
-const baseCssUse = [
-  MiniCssExtractPlugin.loader,
-  'css-loader',
-  'postcss-loader'
-]
 
 module.exports = {
   mode: 'production',
@@ -30,10 +22,6 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'index.css',
-      ignoreOrder: true
-    }),
   ],
   module: {
     rules: [
@@ -46,11 +34,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: baseCssUse
+        use: ['css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: [...baseCssUse, 'less-loader']
+        use: ['css-loader', 'postcss-loader', 'less-loader']
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
@@ -66,23 +54,18 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserWebpackPlugin({
-        parallel: true,
-        extractComments: false,
         terserOptions: {
           compress: {
-            drop_console: true,
             pure_funcs: ['console.log']
-          },
-          output: {
-            comments: false
           }
         }
       }),
-      new CssMinimizerPlugin(),
     ],
   },
   externalsPresets: { node: true },
-  externals: [nodeExternals({
-    allowlist: [],
-  })],
+  externals: [
+    nodeExternals({
+      allowlist: []
+    })
+  ],
 }
