@@ -11,8 +11,8 @@ npm i react-router-waiter -S
 ## 2、使用
 ```js
 // 在项目入口文件index.js或入口组件App.js里引入
-import { HashRouter } from 'react-router-dom' // 引入react-router-dom的官方路由组件
-import RouterWaiter from 'react-router-waiter' // 引入插件
+import { HashRouter } from 'react-router-dom' // 引入官方路由组件
+import RouterWaiter from 'react-router-waiter' // 引入该插件
 import routes from './router' // 引入你的路由配置
 import onRouteBefore from './onRouteBefore' // 引入你定义的路由拦截函数
 
@@ -31,11 +31,8 @@ export default App
 ```
 
 ## 3、配置路由
-（示例：）
 ```js
 const Index = () => import(/* webpackChunkName: "index" */ '@/views/index/index')
-const Login = () => import(/* webpackChunkName: "login" */ '@/views/login/index')
-const Page404 = () => import(/* webpackChunkName: "404" */ '@/views/test/page404')
 
 const routes = [
   {
@@ -50,31 +47,16 @@ const routes = [
       needLogin: true,
     },
   },
-  {
-    path: '/login',
-    component: Login, 
-    meta: {
-      title: '登录',
-    },
-  },
-  {
-    path: '*',
-    component: Page404, 
-    meta: {
-      title: '404',
-    },
-  },
 ]
 
 export default routes
 ```
-+ 目前支持配置的字段有 redirect、component、meta，其他字段和react-router-dom的官方支持字段保持一致。（优先级：redirect > element > component。）
++ 目前支持配置的字段有 redirect、component、meta，其他字段和react-router-dom的官方支持字段保持一致。（优先级：redirect > component > element。）
++ 嵌套路由的使用请看下面的注意事项。
 
 ## 4、配置路由拦截函数
-（示例：）
 ```js
 /**
- * @description: 全局路由拦截
  * @param {string} pathname 当前路由路径
  * @param {object} meta 当前路由自定义meta字段
  * @return {string} 需要跳转到其他页时，就返回一个该页的path路径，或返回resolve该路径的promise对象
@@ -95,7 +77,21 @@ const onRouteBefore = ({ pathname, meta }) => {
 export default onRouteBefore
 ```
 ## 5、API
-组件 RouterWaiter 的配置 API：
+组件 RouterWaiter 的配置属性 API：
 + `routes`，数组类型，路由配置数组（必填）
 + `onRouteBefore`，函数类型，路由拦截函数（可选）
 + `loading`，组件类型，懒加载路由切换时的 loading 效果组件，默认为一个空div标签（可选）
+
+## 6、注意事项
++ react-router 的嵌套路由父级不支持懒加载方式引用公共组件，需改用官方的element方式。
+```js
+import PageLayout from '@/components/PageLayout' // 静态引入，不要使用import函数
+
+{
+  path: '/',
+  element: <PageLayout />, // 父级的公共组件需使用element配置
+  children: [
+    ... // 子级可以继续使用component懒加载方式
+  ]
+},
+```
