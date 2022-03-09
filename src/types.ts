@@ -27,7 +27,7 @@ interface OnRouteBeforeParamsType {
   meta?: MetaType;
 }
 interface OnRouteBeforeType {
-  ({ pathname, meta }?: OnRouteBeforeParamsType): void & (string | Promise<string|undefined>);
+  (payload?: OnRouteBeforeParamsType): void & (string | Promise<string|undefined>);
 }
 
 type ComponentType = any
