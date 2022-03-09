@@ -7,10 +7,21 @@
  */
 import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { ComponentType, MetaType, OnRouteBeforeType } from '@/types'
 
-let temp = null
+let temp: ComponentType | null = null
 
-function Guard ({ element, meta, onRouteBefore }) {
+function Guard (
+  {
+    element,
+    meta,
+    onRouteBefore
+  }: {
+    element: ComponentType;
+    meta: MetaType;
+    onRouteBefore?: OnRouteBeforeType;
+  }
+) {
   meta = meta || {}
 
   const location = useLocation()
@@ -23,16 +34,16 @@ function Guard ({ element, meta, onRouteBefore }) {
       return element
     }
     const pathRes = onRouteBefore({ pathname, meta })
-    const pathResType = Object.prototype.toString.call(pathRes).match(/\s(\w+)\]/)[1]
+    const pathResType = (Object.prototype.toString.call(pathRes).match(/\s(\w+)\]/) as string[])[1]
     if (pathResType === 'Promise') {
-      pathRes.then(res => {
+      pathRes.then((res: string | undefined) => {
         if (res && res !== pathname) {
           navigate(res, { replace: true })
         }
       })
     } else {
       if (pathRes && pathRes !== pathname) {
-        element = <Navigate to={pathRes} replace={true} />
+        element = <Navigate to={pathRes as string} replace={true} />
       }
     }
   }

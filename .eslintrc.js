@@ -16,8 +16,12 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  plugins: [],
+  parser: '@typescript-eslint/parser',
+  plugins: [
+    '@typescript-eslint',
+  ],
   settings: {
     react: {
       version: 'detect'
@@ -39,5 +43,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
+    '@typescript-eslint/no-var-requires': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   }
 }

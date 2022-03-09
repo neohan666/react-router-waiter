@@ -1,52 +1,51 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-  mode: 'production',
   entry: {
-    index: './src/index.js',
+    index: './src/index',
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
     library: {
       type: 'commonjs-static',
     },
+    clean: true,
   },
   resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@': path.resolve(__dirname, './src'),
-    }
+    },
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [],
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
-        options: {
-          cacheDirectory: true
-        },
-        loader: 'babel-loader'
+        test: /\.(jsx?|tsx?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
-        use: ['css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
-        use: ['css-loader', 'postcss-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       {
-        test: /\.(jpe?g|png|gif)$/i,
-        options: {
-          esModule: false,
-          limit: 4096,
-        },
-        loader: 'url-loader',
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        type: 'asset/resource'
       },
     ]
   },

@@ -2,17 +2,20 @@
  * @Description: 主组件
  * @Author: Neo
  * @Date: 2022-02-22
- * @LastEditTime: 2022-03-02
+ * @LastEditTime: 2022-03-08
  * @LastEditors: Neo
  */
 import { useRoutes } from 'react-router-dom'
-import Fn from './fn.js'
+import Fn from './fn'
+import { RouterWaiterPropsType } from '@/types'
 
-function RouterWaiter ({
-  routes,
-  onRouteBefore,
-  loading,
-}) {
+function RouterWaiter (
+  {
+    routes,
+    onRouteBefore,
+    loading,
+  } : RouterWaiterPropsType
+) {
   const fn = new Fn({
     routes,
     onRouteBefore,

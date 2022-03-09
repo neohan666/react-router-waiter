@@ -5,6 +5,6 @@
  * @LastEditTime: 2022-02-22
  * @LastEditors: Neo
  */
-import RouterWaiter from './RouterWaiter/index.jsx'
+import RouterWaiter from './RouterWaiter/index'
 
 export default RouterWaiter

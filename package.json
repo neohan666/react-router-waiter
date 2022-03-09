@@ -1,11 +1,11 @@
 {
   "name": "react-router-waiter",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "react-router v6 路由统一管理及路由拦截方案",
   "author": "neohan",
   "main": "dist/index",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js"
+    "build": "webpack --mode=production --config ./webpack.config.js"
   },
   "keywords": [
     "react",
@@ -31,10 +31,15 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
     "autoprefixer": "^10.0.2",
     "babel-loader": "^8.2.3",
     "browserslist": "^4.14.7",
-    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
@@ -48,22 +53,15 @@
     "postcss-loader": "^4.1.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.3.1",
-    "url-loader": "^4.1.1",
+    "typescript": "^4.6.2",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4",
     "webpack-node-externals": "^3.0.0"
   },
-  "browserslist": {
-    "production": [
-      "> 0.2% in CN",
-      "not dead",
-      "last 2 versions"
-    ],
-    "development": [
-      "last 2 chrome version",
-      "last 2 firefox version",
-      "last 2 safari version"
-    ]
-  }
+  "browserslist": [
+    "> 0.2% in CN",
+    "not dead",
+    "last 2 versions"
+  ]
 }

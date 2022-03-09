@@ -6,14 +6,19 @@
  * @LastEditors: Neo
  */
 import React from 'react'
-import { Navigate } from 'react-router-dom'
-import Guard from './guard.jsx'
+import { Navigate, RouteObject } from 'react-router-dom'
+import Guard from './guard'
+import { RouterWaiterPropsType, ImportFn, MetaType } from '@/types'
 
 export default class Fn {
-  constructor (option) {
+  routes
+  onRouteBefore
+  loading
+
+  constructor (option: RouterWaiterPropsType) {
     this.routes = option.routes || []
     this.onRouteBefore = option.onRouteBefore
-    this.loading = option.loading || <div></div>
+    this.loading = option.loading || (<div></div>)
   }
 
   /**
@@ -23,7 +28,7 @@ export default class Fn {
    * @param {object} meta 自定义字段
    */
   transformRoutes (routeList = this.routes) {
-    const list = []
+    const list:RouteObject[] = []
     routeList.forEach(route => {
       const obj = { ...route }
       if (obj.path === undefined) {
@@ -33,7 +38,7 @@ export default class Fn {
         obj.element = <Navigate to={obj.redirect} replace={true}/>
       }
       if (obj.component) {
-        obj.element = this.lazyLoad(obj.component, obj.meta)
+        obj.element = this.lazyLoad(obj.component, obj.meta || {})
       }
       delete obj.redirect
       delete obj.component
@@ -49,8 +54,7 @@ export default class Fn {
   /**
    * @description: 路由懒加载
    */
-  lazyLoad (importFn, meta) {
-    meta = meta || {}
+  lazyLoad (importFn: ImportFn, meta: MetaType) {
     const Element = React.lazy(importFn)
     const lazyElement = (
       <React.Suspense fallback={this.loading}>

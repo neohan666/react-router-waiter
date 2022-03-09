@@ -1,9 +1,4 @@
 .DS_Store
-public
 dist
 build
-*.html
 src/utils/libs
-
-scripts
-config
