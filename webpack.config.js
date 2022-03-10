@@ -1,6 +1,7 @@
 const path = require('path')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -20,7 +21,16 @@ module.exports = {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  plugins: [],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './src/types.ts'),
+          to: path.resolve(__dirname, './dist/index.d.ts')
+        },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -45,7 +55,12 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024,
+          },
+        },
       },
     ]
   },
