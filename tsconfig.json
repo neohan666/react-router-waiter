@@ -9,8 +9,8 @@
     "importHelpers": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "target": "es5",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "skipLibCheck": true,
@@ -20,10 +20,11 @@
       "@/*": ["src/*"],
     },
     "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "ScriptHost",
+      "ESNext.Promise"
     ],
   },
   "include": [

@@ -7,9 +7,10 @@
  */
 import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { ComponentType, MetaType, OnRouteBeforeType } from '@/types'
+import { ReactCompType, MetaType, OnRouteBeforeType, OnRouteBeforeResType } from '@/types'
+import utils from '@/utils'
 
-let temp: ComponentType | null = null
+let temp: ReactCompType | null = null
 
 function Guard (
   {
@@ -17,7 +18,7 @@ function Guard (
     meta,
     onRouteBefore
   }: {
-    element: ComponentType;
+    element: ReactCompType;
     meta: MetaType;
     onRouteBefore?: OnRouteBeforeType;
   }
@@ -34,9 +35,8 @@ function Guard (
       return element
     }
     const pathRes = onRouteBefore({ pathname, meta })
-    const pathResType = (Object.prototype.toString.call(pathRes).match(/\s(\w+)\]/) as string[])[1]
-    if (pathResType === 'Promise') {
-      pathRes.then((res: string | undefined) => {
+    if (utils.getDataType(pathRes) === 'Promise') {
+      (pathRes as Promise<OnRouteBeforeResType>).then((res: OnRouteBeforeResType) => {
         if (res && res !== pathname) {
           navigate(res, { replace: true })
         }

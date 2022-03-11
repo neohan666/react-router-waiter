@@ -2,6 +2,7 @@
 react-router v6 路由统一管理及路由拦截方案。
 
 + 版本要求：react-router-dom >= 6.2.0
++ 支持TS
 
 ## 1、安装
 ```js
@@ -13,7 +14,7 @@ npm i react-router-waiter -S
 // 在项目入口文件index.js或入口组件App.js里引入
 import { HashRouter } from 'react-router-dom' // 引入官方路由组件
 import RouterWaiter from 'react-router-waiter' // 引入该插件
-import routes from './router' // 引入你的路由配置
+import routes from './routes' // 引入你的路由配置
 import onRouteBefore from './onRouteBefore' // 引入你定义的路由拦截函数
 
 function App () {
@@ -76,6 +77,7 @@ const onRouteBefore = ({ pathname, meta }) => {
 
 export default onRouteBefore
 ```
+
 ## 5、API
 组件 RouterWaiter 的配置属性 API：
 + `routes`，数组类型，路由配置数组（必填）
@@ -94,4 +96,19 @@ import PageLayout from '@/components/PageLayout' // 静态引入，不要使用i
     ... // 子级可以继续使用component懒加载方式
   ]
 },
+```
+
+## 7、TS类型
+```js
+export type {
+  MetaType, // 路由meta字段类型
+  FunctionalImportType, // 懒加载函数式导入组件的类型
+  ReactCompType, // react组件类型
+  RoutesItemType, // 路由配属数组项类型
+  RoutesType, // 路由配置数组类型
+  OnRouteBeforeResType, // 路由拦截函数（实际有效使用的）返回值类型
+  OnRouteBeforeType, // 路由拦截函数类型
+  RouterWaiterPropsType, // RouterWaiter主组件props类型
+  RouterWaiterType, // RouterWaiter主组件类型
+}
 ```

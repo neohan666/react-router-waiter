@@ -1,5 +1,5 @@
 /**
- * @Description: 工具函数类
+ * @Description: 组件工具函数类
  * @Author: Neo
  * @Date: 2022-02-22
  * @LastEditTime: 2022-02-22
@@ -8,7 +8,7 @@
 import React from 'react'
 import { Navigate, RouteObject } from 'react-router-dom'
 import Guard from './guard'
-import { RouterWaiterPropsType, ImportFn, MetaType } from '@/types'
+import { RouterWaiterPropsType, MetaType, FunctionalImportType } from '@/types'
 
 export default class Fn {
   routes
@@ -54,7 +54,7 @@ export default class Fn {
   /**
    * @description: 路由懒加载
    */
-  lazyLoad (importFn: ImportFn, meta: MetaType) {
+  lazyLoad (importFn: FunctionalImportType, meta: MetaType) {
     const Element = React.lazy(importFn)
     const lazyElement = (
       <React.Suspense fallback={this.loading}>
