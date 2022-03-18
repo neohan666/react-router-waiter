@@ -21,6 +21,7 @@ interface RoutesItemType extends RouteObject {
   redirect?: string;
   component?: FunctionalImportType;
   meta?: MetaType;
+  children?: RoutesItemType[];
 }
 
 type RoutesType = RoutesItemType[]
