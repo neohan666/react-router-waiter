@@ -20,10 +20,7 @@ import onRouteBefore from './onRouteBefore' // 引入你定义的路由拦截函
 function App () {
   return (
     <HashRouter>
-      <RouterWaiter
-        routes={routes}
-        onRouteBefore={onRouteBefore}
-      />
+      <RouterWaiter routes={routes} onRouteBefore={onRouteBefore} />
     </HashRouter>
   )
 }
