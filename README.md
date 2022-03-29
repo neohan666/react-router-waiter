@@ -106,3 +106,6 @@ import {
   RouterWaiterPropsType, // RouterWaiter主组件props类型
 } from 'react-router-waiter'
 ```
+
+## 8、应用
+[react-antd-mobx-admin](https://github.com/neohan666/react-antd-mobx-admin)：react后台管理系统 - 项目模板
