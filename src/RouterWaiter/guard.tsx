@@ -7,10 +7,10 @@
  */
 import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { ReactCompType, MetaType, OnRouteBeforeType, OnRouteBeforeResType } from '@/types'
+import { ReactElementType, MetaType, OnRouteBeforeType, OnRouteBeforeResType } from '@/types'
 import utils from '@/utils'
 
-let temp: ReactCompType | null = null
+let temp: ReactElementType | null = null
 
 function Guard (
   {
@@ -18,7 +18,7 @@ function Guard (
     meta,
     onRouteBefore
   }: {
-    element: ReactCompType;
+    element: ReactElementType;
     meta: MetaType;
     onRouteBefore?: OnRouteBeforeType;
   }

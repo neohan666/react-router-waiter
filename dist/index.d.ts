@@ -15,7 +15,7 @@ interface FunctionalImportType {
   (): any;
 }
 
-type ReactCompType = JSX.Element
+type ReactElementType = JSX.Element
 
 interface RoutesItemType extends RouteObject {
   redirect?: string;
@@ -38,7 +38,7 @@ interface OnRouteBeforeType {
 interface RouterWaiterPropsType {
   routes: RoutesType;
   onRouteBefore?: OnRouteBeforeType;
-  loading?: ReactCompType;
+  loading?: ReactElementType;
 }
 
 interface RouterWaiterType {
@@ -48,7 +48,7 @@ interface RouterWaiterType {
 export type {
   MetaType, // 路由meta字段类型
   FunctionalImportType, // 懒加载函数式导入组件的类型
-  ReactCompType, // react组件类型
+  ReactElementType, // react组件实例元素类型
   RoutesItemType, // 路由配属数组项类型
   RoutesType, // 路由配置数组类型
   OnRouteBeforeResType, // 路由拦截函数（实际有效使用的）返回值类型

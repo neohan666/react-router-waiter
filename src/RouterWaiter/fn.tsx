@@ -36,8 +36,7 @@ export default class Fn {
       }
       if (obj.redirect) {
         obj.element = <Navigate to={obj.redirect} replace={true}/>
-      }
-      if (obj.component) {
+      } else if (obj.component) {
         obj.element = this.lazyLoad(obj.component, obj.meta || {})
       }
       delete obj.redirect

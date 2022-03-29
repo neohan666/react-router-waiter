@@ -1,8 +1,5 @@
 # react-router-waiter
-react-router v6 路由统一管理及路由拦截方案。
-
-+ 版本要求：react-router-dom >= 6.2.0
-+ 支持TS
+react-router v6 路由统一管理 及 路由拦截方案。
 
 ## 1、安装
 ```js
@@ -28,19 +25,17 @@ function App () {
 export default App
 ```
 
-## 3、配置路由
+## 3、配置路由列表
 ```js
-const Index = () => import(/* webpackChunkName: "index" */ '@/views/index/index')
-
 const routes = [
   {
     path: '/',
-    redirect: '/index', // redirect，要重定向的路由路径
+    redirect: '/index',
   },
   {
     path: '/index',
-    component: Index, // component，懒加载方式引入的组件
-    meta: { // meta，自定义的数据
+    component: () => import(/* webpackChunkName: "index" */ '@/views/index/index'),
+    meta: {
       title: '首页',
       needLogin: true,
     },
@@ -49,8 +44,8 @@ const routes = [
 
 export default routes
 ```
-+ 目前支持配置的字段有 redirect、component、meta，其他字段和react-router-dom的官方支持字段保持一致。（优先级：redirect > component > element。）
-+ 嵌套路由的使用请看下面的注意事项。
++ 通过`react-router`官方的`element`字段也能配置路由组件，但`element`配置的不支持路由拦截。
++ 嵌套路由的使用请看下面的`注意事项`。
 
 ## 4、配置路由拦截函数
 ```js
@@ -60,11 +55,11 @@ export default routes
  * @return {string} 需要跳转到其他页时，就返回一个该页的path路径，或返回resolve该路径的promise对象
  */
 const onRouteBefore = ({ pathname, meta }) => {
-  // 动态修改页面title
+  // 示例：动态修改页面title
   if (meta.title !== undefined) {
     document.title = meta.title
   }
-  // 判断未登录跳转登录页
+  // 示例：判断未登录跳转登录页
   if (meta.needLogin) {
     if (!isLogin) {
       return '/login'
@@ -76,36 +71,38 @@ export default onRouteBefore
 ```
 
 ## 5、API
-组件 RouterWaiter 的配置属性 API：
-+ `routes`，数组类型，路由配置数组（必填）
-+ `onRouteBefore`，函数类型，路由拦截函数（可选）
-+ `loading`，组件类型，懒加载路由切换时的 loading 效果组件，默认为一个空div标签（可选）
+主组件 RouterWaiter 的配置属性 API：
++ `routes`，[Array] 路由配置列表（必填）
++ `onRouteBefore`，[Function] 路由拦截函数（可选）
++ `loading`，[Element] 懒加载路由切换时的 loading 效果组件（可选）
+
+路由配置列表 routes 的配置项 API：
++ `redirect`，[String] 要重定向的路由路径
++ `component`，[Function] 懒加载方式引入的组件
++ `meta`，[Object] 自定义的数据
+
+（优先级：redirect > component > element）
 
 ## 6、注意事项
-+ react-router 的嵌套路由父级不支持懒加载方式引用公共组件，需改用官方的element方式。
++ react-router 的嵌套路由父级使用懒加载方式引用公共组件时存在一些问题，例如切换子路由时父级公共组件会重新渲染。建议改用官方element属性方式：
 ```js
 import PageLayout from '@/components/PageLayout' // 静态引入，不要使用import函数
 
 {
   path: '/',
-  element: <PageLayout />, // 父级的公共组件需使用element配置
+  element: <PageLayout />, // 父级的公共组件使用element配置
   children: [
-    ... // 子级可以继续使用component懒加载方式
+    ... // 子级可以继续使用component配置
   ]
 },
 ```
 
 ## 7、TS类型
 ```js
-export type {
-  MetaType, // 路由meta字段类型
-  FunctionalImportType, // 懒加载函数式导入组件的类型
-  ReactCompType, // react组件类型
-  RoutesItemType, // 路由配属数组项类型
+import {
   RoutesType, // 路由配置数组类型
-  OnRouteBeforeResType, // 路由拦截函数（实际有效使用的）返回值类型
+  RoutesItemType, // 路由配属数组项类型
   OnRouteBeforeType, // 路由拦截函数类型
   RouterWaiterPropsType, // RouterWaiter主组件props类型
-  RouterWaiterType, // RouterWaiter主组件类型
-}
+} from 'react-router-waiter'
 ```
