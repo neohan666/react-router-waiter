@@ -44,6 +44,7 @@ const routes = [
 
 export default routes
 ```
++ component 属性需使用 import()懒加载方式引入
 + 通过`react-router`官方的`element`字段也能配置路由组件，但`element`配置的不支持路由拦截。
 + 嵌套路由的使用请看下面的`注意事项`。
 
@@ -78,7 +79,7 @@ export default onRouteBefore
 
 路由配置列表 routes 的配置项 API：
 + `redirect`，[String] 要重定向的路由路径
-+ `component`，[Function] 懒加载方式引入的组件
++ `component`，[Function] import()懒加载方式引入的组件
 + `meta`，[Object] 自定义的数据
 
 （优先级：redirect > component > element）
