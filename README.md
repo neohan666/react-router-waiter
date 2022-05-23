@@ -97,6 +97,7 @@ import PageLayout from '@/components/PageLayout' // 静态引入，不要使用i
   ]
 },
 ```
++ 这里的路由拦截是**目标路由加载前的拦截**，且是运行在顶层环境（top level），**非react组件环境**。所以在写路由拦截函数时，不能使用react组件hook（如useState），也应尽量避免引起目标路由重新渲染。
 
 ## 7、TS类型
 ```js
